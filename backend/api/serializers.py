@@ -28,7 +28,7 @@ class CommentSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
     author = UserSerializer(read_only=True)
     created_at = serializers.DateTimeField(read_only=True)
-    post = PostSerializer(read_only=True)
+    origin_post = PostSerializer(read_only=True)
 
     class Meta:
         model = Comment
