@@ -1,0 +1,18 @@
+
+<nav class="navbar navbar-expand-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">Reddit</a>
+  <div [ngbCollapse]="isNavbarCollapsed" class="navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Create Post</button>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <button class="btn btn-outline-dark mr-sm-2 btn-sm" type="submit">LOG IN</button>
+      <button class="btn btn-outline-secondary mr-sm-2 my-2 my-sm-0 btn-sm" type="submit">SIGN UP</button>
+    </form>
+  </div>
+</nav>
