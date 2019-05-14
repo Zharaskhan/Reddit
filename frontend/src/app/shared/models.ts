@@ -6,7 +6,7 @@ export interface IUser {
 export interface IPOST {
     id: number;
     author: IUser;
-    created_at: string;
+    created_at: Date;
     title: string;
     body: string;
 }

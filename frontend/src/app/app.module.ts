@@ -10,13 +10,16 @@ import {AuthInterceptor} from './AuthInterceptor';
 import {ProviderService} from './shared/services/provider.service';
 import { LoginComponent } from './login/login.component';
 import {FormsModule} from '@angular/forms';
+import { PostpageComponent } from './postpage/postpage.component';
+import {MainService} from './shared/services/main.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    PostpageComponent
   ],
   imports: [
     BrowserModule,
@@ -26,6 +29,7 @@ import {FormsModule} from '@angular/forms';
     FormsModule
   ],
   providers: [
+    MainService,
     ProviderService,
     {
       provide: HTTP_INTERCEPTORS,
