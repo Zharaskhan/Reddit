@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import {FormsModule} from '@angular/forms';
 import { PostpageComponent } from './postpage/postpage.component';
 import {MainService} from './shared/services/main.service';
+import { PostdetailComponent } from './postdetail/postdetail.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {MainService} from './shared/services/main.service';
     HeaderComponent,
     FooterComponent,
     LoginComponent,
-    PostpageComponent
+    PostpageComponent,
+    PostdetailComponent
   ],
   imports: [
     BrowserModule,
