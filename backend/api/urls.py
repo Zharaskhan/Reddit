@@ -12,6 +12,7 @@ urlpatterns = [
     path('comments/<int:pk>/', views.CommentCrud.as_view()),
     path('posts/<int:pk>/likes/', views.LikeList.as_view()),
     path('like_post/<int:pk>/', views.LikeDelete.as_view()),
-    path('like_comment/<int:pk>/', views.CommentLike.as_view()),
+    path('like_comment/<int:pk>/', views.CommentLikeDelete.as_view()),
+    path('comments/<int:pk>/likes/', views.CommentLikeList.as_view()),
 
 ]

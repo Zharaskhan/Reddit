@@ -26,7 +26,8 @@ class PostCrud(APIView):
             return Response({'error: not found'},status=status.HTTP_404_NOT_FOUND)
 
     def get(self,request,pk):
-            task_list=self.get_object(pk)
+            #task_list=self.get_object(pk)
+            task_list = Post.objects.get(id=pk)
             serializer = PostSerializer(task_list)
             return Response(serializer.data)
 
