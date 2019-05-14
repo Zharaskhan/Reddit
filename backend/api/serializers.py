@@ -19,6 +19,8 @@ class PostSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
     author = UserSerializer(read_only=True)
     created_at = serializers.DateTimeField(read_only=True)
+    post_likes = serializers.ReadOnlyField()
+    post_comments = serializers.ReadOnlyField()
 
     class Meta:
         model = Post
@@ -29,6 +31,7 @@ class CommentSerializer(serializers.ModelSerializer):
     author = UserSerializer(read_only=True)
     created_at = serializers.DateTimeField(read_only=True)
     origin_post = PostSerializer(read_only=True)
+    comment_likes = serializers.ReadOnlyField()
 
     class Meta:
         model = Comment

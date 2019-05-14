@@ -15,6 +15,14 @@ class Post(models.Model):
 
     objects = PostManager()
 
+    @property
+    def post_likes(self):
+        return self.likes.count()
+
+    @property
+    def post_comments(self):
+        return self.comments.count()
+
     class Meta:
         verbose_name = 'Post'
         verbose_name_plural = 'Posts'
@@ -28,6 +36,10 @@ class Comment(models.Model):
     text = models.TextField('Text', max_length=600)
     created_at = models.DateTimeField('Created', auto_now_add=True, null=False)
     origin_post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+
+    @property
+    def comment_likes(self):
+        return self.likes.count()
 
     def __str__(self):
         return 'From {} to the  {} at {}'.format(self.author, self.origin_post.title, self.created_at)
