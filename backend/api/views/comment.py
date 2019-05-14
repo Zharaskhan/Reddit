@@ -23,12 +23,6 @@ class CommentList(generics.ListCreateAPIView):
 		return serializer.save(author=self.request.user, origin_post=post)
 
 
-class CommentDetailList(generics.RetrieveUpdateDestroyAPIView):
-	authentication_classes = (TokenAuthentication,)
-	serializer_class = CommentSerializer
-	queryset = Comment.objects.all()
-	permission_classes = (IsAuthenticatedOrReadOnly, )
-
 
 class CommentCrud(APIView):
     def get_object(self,pk):

@@ -5,7 +5,8 @@ from rest_framework.views import APIView
 from api.models import Post
 from rest_framework.response import Response
 from api.serializers import PostSerializer
-
+from rest_framework import status
+from rest_framework.response import Response
 
 class PostList(generics.ListCreateAPIView):
     authentication_classes = (TokenAuthentication,)
@@ -16,19 +17,6 @@ class PostList(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         return serializer.save(author=self.request.user)
 
-
-class PostDetailList(generics.RetrieveUpdateDestroyAPIView):
-    authentication_classes = (TokenAuthentication,)
-    serializer_class = PostSerializer
-    queryset = Post.objects.all()
-    permission_classes = (IsAuthenticatedOrReadOnly, )
-    lookup_field = 'pk'
-
-    def get_object(self):
-        return Post.objects.get(id=self.kwargs[self.lookup_field])
-
-    def get_queryset(self):
-        return Post.objects.for_user(user=self.request.user)
 
 class PostCrud(APIView):
     def get_object(self,pk):

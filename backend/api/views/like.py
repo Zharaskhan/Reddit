@@ -1,16 +1,41 @@
 from rest_framework import generics
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
-
-from api.models import CommentLike, Like
+from rest_framework.views import APIView
+from api.models import CommentLike, Like, Post
 from api.serializers import LikeSerializer, CommentLikeSerializer
+from rest_framework import status
+from rest_framework.response import Response
+from django.core.exceptions import ObjectDoesNotExist
+
+class LikeList(generics.ListCreateAPIView):
+	authentication_classes = (TokenAuthentication,)
+	serializer_class = LikeSerializer
+	permission_classes = (IsAuthenticatedOrReadOnly, )
+	#queryset = Like.objects.all()
+
+	def get_queryset(self):
+		post = Post.objects.get(pk=self.kwargs.get('pk'))
+		queryset= post.likes
+		return queryset
 
 
-class Like(generics.RetrieveUpdateAPIView):
-    authentication_classes = (TokenAuthentication,)
-    serializer_class = LikeSerializer
-    permission_classes = (IsAuthenticatedOrReadOnly, )
-    queryset = Like.objects.all()
+	def perform_create(self, serializer):
+		post = Post.objects.get(pk=self.kwargs.get('pk'))
+		return serializer.save(author=self.request.user, post=post)
+
+
+class LikeDelete(APIView):
+    def get_object(self,pk):
+        try:
+            return Like.objects.filter(author=self.request.user).get(id=pk)
+        except ObjectDoesNotExist:
+            return Response({'error: not found'},status=status.HTTP_404_NOT_FOUND)
+
+    def delete(self, request, pk):
+        like = self.get_object(pk)
+        like.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class CommentLike(generics.RetrieveUpdateAPIView):
