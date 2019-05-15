@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MainService } from './main.service';
 import {HttpClient} from '@angular/common/http';
-import {IAuthResponse, IPOST} from '../models';
+import {IAuthResponse, ICOMMENT, IPOST} from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +40,12 @@ export class ProviderService extends MainService {
     return this.post('http://localhost:8000/api/posts/', {
       name,
       body,
+    });
+  }
+
+  createComment(id: number, text: string): Promise<ICOMMENT> {
+    return this.post(`http://localhost:8000/api/posts/${id}/comments/`, {
+      text
     });
   }
 /*

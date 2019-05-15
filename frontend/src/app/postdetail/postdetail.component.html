@@ -24,7 +24,7 @@
   <div class="container">
     <div class="card text-center mb-lg-5 "  *ngFor="let icomment of post.comments">
       <div class="card-body">
-        <h5 class="card-title">{{icomment.author}}</h5>
+        <h5 class="card-title">{{icomment.author.username}}</h5>
         <p class="card-text">{{icomment.text}}</p>
         <button type="button" class="btn btn-danger">
           Likes <span class="badge badge-light">{{icomment.comment_likes}}</span>
@@ -32,6 +32,14 @@
       </div>
     </div>
   </div>
+
+  <form *ngIf="provider.isAuthenticated()" >
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Leave a comment</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="text"  [ngModelOptions]="{standalone:true}"></textarea>
+      <button type="submit" class="btn btn-primary mb-2" (click)="createComment()">Comment!</button>
+    </div>
+  </form>
 
 
 </ng-container>

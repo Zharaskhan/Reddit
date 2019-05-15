@@ -11,6 +11,7 @@ import {MainService} from '../shared/services/main.service';
 })
 export class PostdetailComponent implements OnInit {
   public post: IPOST;
+  public text = '';
   constructor(private provider: ProviderService,  private route: ActivatedRoute, private main: MainService) { }
 
   ngOnInit() {
@@ -21,6 +22,17 @@ export class PostdetailComponent implements OnInit {
       setTimeout(() => {
       }, 5000);
     });
+  }
+
+  createComment() {
+    if (this.text !== '') {
+      const id = +this.route.snapshot.paramMap.get('id');
+      this.provider.createComment(id, this.text).then(res => {
+        this.text = '';
+        this.post.post_comments += 1;
+        this.post.comments.push(res);
+      });
+    }
   }
 
 }
