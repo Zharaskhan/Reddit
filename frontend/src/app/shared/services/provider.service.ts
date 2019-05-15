@@ -54,11 +54,36 @@ export class ProviderService extends MainService {
     });
   }
 
+  createPostLike(id: number): Promise<IPOST> {
+    return this.post(`http://localhost:8000/api/posts/${id}/likes/`, {
+      
+    });
+  }
+
+  createCommentLike(icomment: ICOMMENT): Promise<ICOMMENT> {
+    return this.post(`http://localhost:8000/api/comments/${icomment.id}/likes/`, {
+      
+    });
+  }
+
   createComment(id: number, text: string): Promise<ICOMMENT> {
     return this.post(`http://localhost:8000/api/posts/${id}/comments/`, {
       text
     });
   }
+
+  updateComment(comm: ICOMMENT){
+    return this.put(`http://localhost:8000/api/comments/${comm.id}/`, {
+      text: comm.text
+      
+    })
+  }
+
+  deleteComment(id: number) {
+    return this.delet(`http://localhost:8000/api/comments/${id}/`, {});
+  }
+
+
 /*
   getContact(id: number): Promise<IContact> {
     return this.get(`http://localhost:8000/api/contacts/${id}/`, {});

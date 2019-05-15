@@ -14,6 +14,8 @@ export interface IPOST {
     comments: ICOMMENT[];
 }
 
+
+
 export interface IAuthResponse {
     token: string;
 }
