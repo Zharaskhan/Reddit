@@ -19,6 +19,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 
 class CommentSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
+    text = serializers.CharField()
     author = UserSerializer(read_only=True)
     created_at = serializers.DateTimeField(read_only=True)
     comment_likes = serializers.ReadOnlyField()
@@ -30,6 +31,7 @@ class CommentSerializer(serializers.Serializer):
 
     def update(self, instance, validated_data):
         instance.author = validated_data.get('author', instance.author)
+        instance.text = validated_data.get('text', instance.text)
         instance.created_at = validated_data.get('created_at', instance.created_at)
         instance.comment_likes = validated_data.get('comment_likes', instance.comment_likes)
         instance.save()
