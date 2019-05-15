@@ -13,6 +13,8 @@ class PostList(generics.ListCreateAPIView):
     serializer_class = PostSerializer
     queryset = Post.objects.all()
     permission_classes = (IsAuthenticatedOrReadOnly, )
+    model = Post
+    template_name = 'home.html'
 
     def perform_create(self, serializer):
         return serializer.save(author=self.request.user)
