@@ -35,6 +35,17 @@ export class ProviderService extends MainService {
     return this.get(`http://localhost:8000/api/posts/${id}/`, {});
   }
 
+  deletePost(id: number) {
+    return this.delet(`http://localhost:8000/api/posts/${id}/`, {});
+  }
+
+  updatePost(post: IPOST){
+    return this.put(`http://localhost:8000/api/posts/${post.id}/`, {
+      title: post.title,
+      body: post.body
+    })
+  }
+
 
   createPost(title: string, body: string): Promise<IPOST> {
     return this.post('http://localhost:8000/api/posts/', {
