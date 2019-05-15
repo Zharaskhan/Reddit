@@ -1,0 +1,26 @@
+<ng-container>
+  <!-- https://getbootstrap.com/docs/4.3/components/card/ -->
+  <div class="container">
+      <div class="card text-center mb-lg-5 " *ngFor="let p of posts">
+        <div class="card-header">
+          {{p.author.username}}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{p.title}}</h5>
+          <p class="card-text">{{p.body}}</p>
+          <a [routerLink]="['posts', p.id]" class="btn btn-primary">Details</a>
+        </div>
+        <div class="card-footer text-muted">
+          <p>  {{main.formatDate(p.created_at)}} </p>
+          <button type="button" class="btn btn-danger">
+            Likes <span class="badge badge-light">{{p.post_likes}}</span>
+          </button>
+          <button type="button" class="btn btn-info">
+            Comments <span class="badge badge-light">{{p.post_comments}}</span>
+          </button>
+        </div>
+      </div>
+  </div>
+
+
+</ng-container>

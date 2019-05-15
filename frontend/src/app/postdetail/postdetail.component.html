@@ -1,0 +1,37 @@
+<ng-container>
+  <!-- https://getbootstrap.com/docs/4.3/components/card/ -->
+  <div class="container">
+    <div class="card text-center mb-lg-5 ">
+      <div class="card-header">
+        {{post.author.username}}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{post.title}}</h5>
+        <p class="card-text">{{post.body}}</p>
+      </div>
+      <div class="card-footer text-muted">
+        <p>  {{main.formatDate(post.created_at)}} </p>
+        <button type="button" class="btn btn-danger">
+          Likes <span class="badge badge-light">{{post.post_likes}}</span>
+        </button>
+        <button type="button" class="btn btn-info">
+          Comments <span class="badge badge-light">{{post.post_comments}}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card text-center mb-lg-5 "  *ngFor="let icomment of post.comments">
+      <div class="card-body">
+        <h5 class="card-title">{{icomment.author}}</h5>
+        <p class="card-text">{{icomment.text}}</p>
+        <button type="button" class="btn btn-danger">
+          Likes <span class="badge badge-light">{{icomment.comment_likes}}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+</ng-container>

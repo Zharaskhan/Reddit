@@ -16,4 +16,12 @@ export class PostpageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.provider.getPosts().then(re
+    this.provider.getPosts().then(res => {
+      this.posts = res;
+      setTimeout(() => {
+      }, 5000);
+    });
+  }
+
+
+}
