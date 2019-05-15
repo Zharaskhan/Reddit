@@ -1,25 +1,23 @@
 <ng-container>
   <!-- https://getbootstrap.com/docs/4.3/components/card/ -->
   <div class="container">
-    <div class="card text-center mb-lg-5 ">
-      <div class="card-header">
-        {{post.author.username}}
-      </div>
-      <div class="card-body">
-        <h5 class="card-title">{{post.title}}</h5>
-        <p class="card-text">{{post.body}}</p>
-      </div>
-      <div class="card-footer text-muted">
-        <p>  {{main.formatDate(post.created_at)}} </p>
-        <button type="button" class="btn btn-outline-danger m-1" (click)="deletePost(post.id)">Delete</button>
-        <button type="button" class="btn btn-outline-primary m-1" (click)="changeMode('update_post')">Update</button>
-        <button type="button" class="btn btn-danger">
-          Likes <span class="badge badge-light">{{post.post_likes}}</span>
-        </button>
-        <button type="button" class="btn btn-info">
-          Comments <span class="badge badge-light">{{post.post_comments}}</span>
-        </button>
-      </div>
+
+      <div class="jumbotron">
+          <h1 class="display-4">{{post.title}}</h1>
+          <p class="lead">{{post.body}}</p>
+          <hr class="my-4">
+          <p>Created by {{post.author.username}}</p>
+          <ul class="list-unstyled list-inline font-small">
+              <li class="list-inline-item pr-2  white-text"><i class="far fa-clock pr-1"></i>{{main.formatDate(post.created_at)}}</li>
+              <li class="list-inline-item pr-2 "><i class="far fa-heart pr-1"></i>{{post.post_likes}}</li>
+              <li class="list-inline-item pr-2 "><i class="far fa-comments pr-1"></i>{{post.post_comments}}</li>
+          </ul>
+          <p class="lead">
+            <button type="button" class="btn btn-outline-danger m-1" (click)="deletePost(post.id)">Delete</button>
+            <button type="button" class="btn btn-outline-primary m-1" (click)="changeMode('update_post')">Update</button>
+          </p>
+        </div>
+  
       <ng-container *ngIf="mode=='update_post'">
         <h5>Update Post {{post.title}}</h5>
         <div class="form-group">
@@ -30,17 +28,14 @@
           <button type="submit" class="btn btn-outline-dark m-2" (click)="updatePost()">Update</button>
         </div>
       </ng-container>
-    </div>
   </div>
 
   <div class="container">
     <div class="card text-center mb-lg-5 "  *ngFor="let icomment of post.comments">
       <div class="card-body">
-        <h5 class="card-title">{{icomment.author.username}}</h5>
+        <h5 class="card-title">User {{icomment.author.username}}</h5>
         <p class="card-text">{{icomment.text}}</p>
-        <button type="button" class="btn btn-danger">
-          Likes <span class="badge badge-light">{{icomment.comment_likes}}</span>
-        </button>
+        <p><i class="far fa-heart pr-1"></i>{{icomment.comment_likes}}</p>
       </div>
     </div>
   </div>
