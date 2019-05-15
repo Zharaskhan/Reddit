@@ -15,26 +15,28 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         model = User
         fields = ('username', 'password')
 
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
+    author = UserSerializer(read_only=True)
+    created_at = serializers.DateTimeField(read_only=True)
+    comment_likes = serializers.ReadOnlyField()
+
+    class Meta:
+        model = Comment
+        fields = '__all__'
+
 class PostSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
     author = UserSerializer(read_only=True)
     created_at = serializers.DateTimeField(read_only=True)
     post_likes = serializers.ReadOnlyField()
     post_comments = serializers.ReadOnlyField()
+    comments = CommentSerializer(read_only=True, many=True)
 
     class Meta:
         model = Post
-        fields = '__all__'
-
-class CommentSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField(read_only=True)
-    author = UserSerializer(read_only=True)
-    created_at = serializers.DateTimeField(read_only=True)
-    origin_post = PostSerializer(read_only=True)
-    comment_likes = serializers.ReadOnlyField()
-
-    class Meta:
-        model = Comment
         fields = '__all__'
 
 
