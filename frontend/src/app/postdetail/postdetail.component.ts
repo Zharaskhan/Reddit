@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ProviderService} from '../shared/services/provider.service';
-import {IPOST} from '../shared/models';
+import {IPOST, ICOMMENT} from '../shared/models';
 import {ActivatedRoute} from '@angular/router';
 import {MainService} from '../shared/services/main.service';
 
@@ -11,6 +11,8 @@ import {MainService} from '../shared/services/main.service';
 })
 export class PostdetailComponent implements OnInit {
   public post: IPOST;
+  public comm: ICOMMENT;
+  public commentss: ICOMMENT[] = [];
   public post_list: IPOST[] = [];
   public text = '';
 
@@ -40,6 +42,60 @@ export class PostdetailComponent implements OnInit {
       });
     }
   }
+
+
+  updateComment(icomment:ICOMMENT){
+    if(this.text != ''){
+      icomment.text = this.text;
+      this.provider.updateComment(icomment).then(res => {
+        for (let i = 0; i < this.commentss.length; i++){
+          if (this.commentss[i].id == icomment.id){
+            this.commentss[i].text = this.text;
+            
+          }
+        }
+        this.text = '';
+        
+      })
+    }
+    this.changeMode('update_comment');
+  }
+
+  deleteComment(id: number){
+    this.provider.deleteComment(id).then(res => {
+      for( let i = 0; i < this.commentss.length; i++){
+        if ( this.commentss[i].id === id) {
+          this.commentss.splice(i, 1);
+        }
+      }
+    })
+  }
+
+  createPostLike() {
+    
+      const id = +this.route.snapshot.paramMap.get('id');
+      this.provider.createPostLike(id).then(res => {
+        
+        this.post.post_likes += 1;
+        
+      });
+    
+  }
+
+  createCommentLike(icomment:ICOMMENT) {
+    
+    
+    this.provider.createCommentLike(icomment).then(res => {
+      for (let i = 0; i < this.commentss.length; i++){
+        if (this.commentss[i].id == icomment.id){
+          this.commentss[i].comment_likes += 1;
+          
+        }
+      }
+      
+    });
+  
+}
 
 
   deletePost(id: number){

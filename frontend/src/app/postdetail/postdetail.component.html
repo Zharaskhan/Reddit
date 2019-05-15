@@ -9,8 +9,8 @@
           <p>Created by {{post.author.username}}</p>
           <ul class="list-unstyled list-inline font-small">
               <li class="list-inline-item pr-2  white-text"><i class="far fa-clock pr-1"></i>{{main.formatDate(post.created_at)}}</li>
-              <li class="list-inline-item pr-2 "><i class="far fa-heart pr-1"></i>{{post.post_likes}}</li>
-              <li class="list-inline-item pr-2 "><i class="far fa-comments pr-1"></i>{{post.post_comments}}</li>
+              <li class="list-inline-item pr-2 " (click)="createPostLike()"><i class="far fa-heart pr-1" ></i>{{post.post_likes}}</li>
+              <li class="list-inline-item pr-2 "><i class="far fa-comments pr-1" ></i>{{post.post_comments}}</li>
           </ul>
           <p class="lead">
             <button type="button" class="btn btn-outline-danger m-1" (click)="deletePost(post.id)">Delete</button>
@@ -35,7 +35,16 @@
       <div class="card-body">
         <h5 class="card-title">User {{icomment.author.username}}</h5>
         <p class="card-text">{{icomment.text}}</p>
-        <p><i class="far fa-heart pr-1"></i>{{icomment.comment_likes}}</p>
+        <button type="submit" class="btn btn-outline-dark m-2" (click)="changeMode('update_comment')">Update</button>
+        <p (click)="createCommentLike(icomment)"><i class="far fa-heart pr-1"></i>{{icomment.comment_likes}}</p>
+        <ng-container *ngIf="mode=='update_comment'">
+            <h5>Update Comment</h5>
+            <div class="form-group">
+              <label>Text</label>
+              <input type="text" class="form-control" placeholder="Enter text" value="{{icomment.text}}" [(ngModel)]="text">
+              <button type="submit" class="btn btn-outline-dark m-2" (click)="updateComment(icomment)">Update</button>
+            </div>
+        </ng-container>
       </div>
     </div>
   </div>
