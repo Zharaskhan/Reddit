@@ -13,6 +13,7 @@ import {FormsModule} from '@angular/forms';
 import { PostpageComponent } from './postpage/postpage.component';
 import {MainService} from './shared/services/main.service';
 import { PostdetailComponent } from './postdetail/postdetail.component';
+import { CreatepostComponent } from './createpost/createpost.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { PostdetailComponent } from './postdetail/postdetail.component';
     FooterComponent,
     LoginComponent,
     PostpageComponent,
-    PostdetailComponent
+    PostdetailComponent,
+    CreatepostComponent
   ],
   imports: [
     BrowserModule,

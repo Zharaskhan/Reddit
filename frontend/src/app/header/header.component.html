@@ -7,7 +7,7 @@
   <div [ngbCollapse]="isNavbarCollapsed" class="navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" *ngIf="provider.isAuthenticated()">Create Post</button>
+        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit" *ngIf="provider.isAuthenticated()" routerLink="/create_post">Create Post</button>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">

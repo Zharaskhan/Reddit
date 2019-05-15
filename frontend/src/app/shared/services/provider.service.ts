@@ -38,7 +38,7 @@ export class ProviderService extends MainService {
 
   createPost(title: string, body: string): Promise<IPOST> {
     return this.post('http://localhost:8000/api/posts/', {
-      name,
+      title,
       body,
     });
   }
