@@ -23,6 +23,10 @@ class Post(models.Model):
     def post_comments(self):
         return self.comments.count()
 
+    @property
+    def comments(self):
+        return self.comments
+
     class Meta:
         verbose_name = 'Post'
         verbose_name_plural = 'Posts'
