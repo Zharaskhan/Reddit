@@ -1,25 +1,39 @@
 <ng-container>
   <!-- https://getbootstrap.com/docs/4.3/components/card/ -->
-  <div class="container">
-      <div class="card text-center mb-lg-5 " *ngFor="let p of posts">
-        <div class="card-header">
-          {{p.author.username}}
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">{{p.title}}</h5>
-          <p class="card-text">{{p.body}}</p>
-          <a [routerLink]="['posts', p.id]" class="btn btn-primary">Details</a>
-        </div>
-        <div class="card-footer text-muted">
-          <p>  {{main.formatDate(p.created_at)}} </p>
-          <button type="button" class="btn btn-danger">
-            Likes <span class="badge badge-light">{{p.post_likes}}</span>
-          </button>
-          <button type="button" class="btn btn-info">
-            Comments <span class="badge badge-light">{{p.post_comments}}</span>
-          </button>
+  <div class="container ">
+    <div class="row">
+      <div class="col-8">
+        <div class="card text-center w-75 mb-lg-5" *ngFor="let p of posts">
+          <div class="card-header" style="background-color: red; color: white"> 
+            Created by {{p.author.username}}
+          </div>
+          <div class="card-body">
+            <!-- <h5 class="card-title">{{p.title}}</h5> -->
+            <h5 [routerLink]="['posts', p.id]" class="card-title">{{p.title}}</h5>
+            <p class="card-text">{{p.body}}</p>
+            <!-- <a [routerLink]="['posts', p.id]" class="btn btn-primary">Details</a> -->
+          </div>
+          <div class="card-footer text-muted" id="footer">
+            <ul class="list-unstyled list-inline font-small">
+              <li class="list-inline-item pr-2  white-text"><i class="far fa-clock pr-1"></i>{{main.formatDate(p.created_at)}}</li>
+              <li class="list-inline-item pr-2 "><i class="far fa-heart pr-1"></i>{{p.post_likes}}</li>
+              <li class="list-inline-item pr-2 "><i class="far fa-comments pr-1"></i>{{p.post_comments}}</li>
+            </ul>
+          </div>
         </div>
       </div>
+      <div class="col-4">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="https://www.printplaygames.com/wp-content/uploads/2018/06/reddit-1-logo-png-transparent.png" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">r/popular</h5>
+              <p class="card-text">The best posts on Reddit for you, pulled from the most active communities on Reddit. Check here to see the most shared, upvoted, and commented content on the internet.</p>
+          
+              <button class="btn btn-primary my-2 my-sm-0" type="submit" *ngIf="provider.isAuthenticated()" routerLink="/create_post">Create Post</button>
+            </div>
+          </div>
+      </div>
+    </div>
   </div>
 
 
